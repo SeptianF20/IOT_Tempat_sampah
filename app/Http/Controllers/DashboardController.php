@@ -22,48 +22,95 @@ class DashboardController extends Controller
         $total_sampah = BobotSampah::sum('total_sampah');
 
         $indikator_sampah_plastik_terbaru_lantai1 = IndikatorSampah::where('jenis', 'plastik')
-            ->where('lokasi', 'lantai_1')
-            ->orderBy('id', 'desc')
-            ->get()
-            ->first();
-        $indikator_sampah_plastik_terbaru_lantai1_persen = ($indikator_sampah_plastik_terbaru_lantai1->tinggi / 25) * 100;
+        ->where('lokasi', 'lantai_1')
+        ->orderBy('id', 'desc')
+        ->get()
+        ->first();
+
+        if ($indikator_sampah_plastik_terbaru_lantai1) {
+            if ($indikator_sampah_plastik_terbaru_lantai1->tinggi == null) {
+                $indikator_sampah_plastik_terbaru_lantai1_persen = 0;
+            } else {
+                $indikator_sampah_plastik_terbaru_lantai1_persen = ($indikator_sampah_plastik_terbaru_lantai1->tinggi / 25) * 100;
+            }
+        } else {
+            $indikator_sampah_plastik_terbaru_lantai1_persen = 0;
+        }
 
         $indikator_sampah_kertas_terbaru_lantai1 = IndikatorSampah::where('jenis', 'kertas')
         ->where('lokasi', 'lantai_1')
         ->orderBy('id', 'desc')
         ->get()
         ->first();
-        $indikator_sampah_kertas_terbaru_lantai1_persen = ($indikator_sampah_kertas_terbaru_lantai1->tinggi / 25) * 100;
+        if ($indikator_sampah_kertas_terbaru_lantai1) {
+            if ($indikator_sampah_kertas_terbaru_lantai1->tinggi == null) {
+                $indikator_sampah_kertas_terbaru_lantai1_persen = 0;
+            } else {
+                $indikator_sampah_kertas_terbaru_lantai1_persen = ($indikator_sampah_kertas_terbaru_lantai1->tinggi / 25) * 100;
+            }
+        } else {
+            $indikator_sampah_kertas_terbaru_lantai1_persen = 0;
+        }
 
         $indikator_sampah_kaleng_terbaru_lantai1 = IndikatorSampah::where('jenis', 'kaleng')
         ->where('lokasi', 'lantai_1')
         ->orderBy('id', 'desc')
         ->get()
         ->first();
-        $indikator_sampah_kaleng_terbaru_lantai1_persen = ($indikator_sampah_kaleng_terbaru_lantai1->tinggi / 25) * 100;
+        if ($indikator_sampah_kaleng_terbaru_lantai1) {
+            if ($indikator_sampah_kaleng_terbaru_lantai1->tinggi == null) {
+                $indikator_sampah_kaleng_terbaru_lantai1_persen = 0;
+            } else {
+                $indikator_sampah_kaleng_terbaru_lantai1_persen = ($indikator_sampah_kaleng_terbaru_lantai1->tinggi / 25) * 100;
+            }
+        } else {
+            $indikator_sampah_kaleng_terbaru_lantai1_persen = 0;
+        }
 
         $indikator_sampah_plastik_terbaru_lantai2 = IndikatorSampah::where('jenis', 'plastik')
             ->where('lokasi', 'lantai_2')
             ->orderBy('id', 'desc')
             ->get()
             ->first();
-        $indikator_sampah_plastik_terbaru_lantai2_persen = ($indikator_sampah_plastik_terbaru_lantai2->tinggi / 25) * 100;
+            if ($indikator_sampah_plastik_terbaru_lantai2) {
+                if ($indikator_sampah_plastik_terbaru_lantai2->tinggi == null) {
+                    $indikator_sampah_plastik_terbaru_lantai2_persen = 0;
+                } else {
+                    $indikator_sampah_plastik_terbaru_lantai2_persen = ($indikator_sampah_plastik_terbaru_lantai2->tinggi / 25) * 100;
+                }
+            } else {
+                $indikator_sampah_plastik_terbaru_lantai2_persen = 0;
+            }
 
         $indikator_sampah_kertas_terbaru_lantai2 = IndikatorSampah::where('jenis', 'kertas')
             ->where('lokasi', 'lantai_2')
             ->orderBy('id', 'desc')
             ->get()
             ->first();
-        $indikator_sampah_kertas_terbaru_lantai2_persen = ($indikator_sampah_kertas_terbaru_lantai2->tinggi / 25) * 100;
+        if ($indikator_sampah_kertas_terbaru_lantai2) {
+            if ($indikator_sampah_kertas_terbaru_lantai2->tinggi == null) {
+                $indikator_sampah_kertas_terbaru_lantai2_persen = 0;
+            } else {
+                $indikator_sampah_kertas_terbaru_lantai2_persen = ($indikator_sampah_kertas_terbaru_lantai2->tinggi / 25) * 100;
+            }
+        } else {
+            $indikator_sampah_kertas_terbaru_lantai2_persen = 0;
+        }
 
         $indikator_sampah_kaleng_terbaru_lantai2 = IndikatorSampah::where('jenis', 'kaleng')
         ->where('lokasi', 'lantai_2')
         ->orderBy('id', 'desc')
         ->get()
         ->first();
-        $indikator_sampah_kaleng_terbaru_lantai2_persen = ($indikator_sampah_kaleng_terbaru_lantai1->tinggi / 25) * 100;
-
-
+        if ($indikator_sampah_kaleng_terbaru_lantai2) {
+            if ($indikator_sampah_kaleng_terbaru_lantai2->tinggi == null) {
+                $indikator_sampah_kaleng_terbaru_lantai2_persen = 0;
+            } else {
+                $indikator_sampah_kaleng_terbaru_lantai2_persen = ($indikator_sampah_kaleng_terbaru_lantai2->tinggi / 25) * 100;
+            }
+        } else {
+            $indikator_sampah_kaleng_terbaru_lantai2_persen = 0;
+        }
 
         $total_sampah_bulanan = BobotSampah::select(DB::raw("SUM(total_sampah) as count"), DB::raw("MONTHNAME(tanggal) as month_name"))
         ->whereYear('created_at', date('Y'))
